@@ -104,11 +104,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   OWInit();
 
-
   sct_init();
 
   int16_t temp_18b20;
   uint16_t temp = 0;
+
+  uint16_t index_NTC;
 
   HAL_ADCEx_Calibration_Start(&hadc);
   HAL_ADC_Start(&hadc);
@@ -122,6 +123,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	/*
 	  	OWConvertAll();
 		HAL_Delay(CONVERT_T_DELAY);
 
@@ -131,8 +133,10 @@ int main(void)
 
 		sct_value(temp,0);
 
-		HAL_ADC_GetValue(&hadc);
-
+	*/
+	  index_NTC=HAL_ADC_GetValue(&hadc);
+	  HAL_Delay(CONVERT_T_DELAY);
+	  sct_value(tep_NTC[index_NTC],0);
   }
   /* USER CODE END 3 */
 }
