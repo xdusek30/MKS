@@ -24,7 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lis2dw12_reg.h"
-
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -91,9 +91,9 @@ static int32_t platform_read(void *handle, uint8_t reg, uint8_t *bufp, uint16_t 
 
 int _write(int file, char const *buf, int n) // definice funkce write
 {
- /* stdout redirection to UART2 */
- HAL_UART_Transmit(&huart2, (uint8_t*)(buf), n, HAL_MAX_DELAY);
- return n;
+	/* stdout redirection to UART2 */
+	HAL_UART_Transmit(&huart2, (uint8_t*)(buf), n, HAL_MAX_DELAY);
+	return n;
 }
 /* USER CODE END PFP */
 
@@ -469,15 +469,20 @@ void StartAcceleroTask(void const * argument)
 		msg=0;
 		xQueueSend(xVisualQueueHandle, &msg, 0);
 		osDelay(1000);
-		*/
+		 */
 
 		int16_t msg;
+		static int32_t time = 0;
 
 		lis2dw12_fifo_data_level_get(&lis2dw12, &samples);
 		for (uint8_t i = 0; i < samples; i++) {
-		 // Read acceleration data
-		 lis2dw12_acceleration_raw_get(&lis2dw12, raw_acceleration);
-		 printf("X=%d Y=%d Z=%d\n", raw_acceleration[0], raw_acceleration[1], raw_acceleration[2]);
+			// Read acceleration data
+			lis2dw12_acceleration_raw_get(&lis2dw12, raw_acceleration);
+			if (HAL_GetTick() > time + 1000)
+			{
+			printf("X=%d Y=%d Z=%d\n", raw_acceleration[0], raw_acceleration[1], raw_acceleration[2]);
+			time = HAL_GetTick();
+			}
 		}
 
 		msg=raw_acceleration[0];
