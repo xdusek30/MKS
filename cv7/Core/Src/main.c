@@ -480,8 +480,8 @@ void StartAcceleroTask(void const * argument)
 			lis2dw12_acceleration_raw_get(&lis2dw12, raw_acceleration);
 			if (HAL_GetTick() > time + 1000)
 			{
-			printf("X=%d Y=%d Z=%d\n", raw_acceleration[0], raw_acceleration[1], raw_acceleration[2]);
-			time = HAL_GetTick();
+				printf("X=%d Y=%d Z=%d\n", raw_acceleration[0], raw_acceleration[1], raw_acceleration[2]);
+				time = HAL_GetTick();
 			}
 		}
 
