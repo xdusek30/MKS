@@ -1,8 +1,15 @@
 
-Mikrokontrolery:
-  Programoval jsem například:
-    stopky
-    myš k počítači
-    tlačítka
-    encodery
+Mikrokontrolery:  
+
+  Programoval jsem například:  
+  
+    stopky,  
+    
+    myš k počítači,  
+    
+    tlačítka,  
+    
+    encodery, 
+
+    atd..
     
